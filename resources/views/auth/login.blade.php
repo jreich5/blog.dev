@@ -1,45 +1,47 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title', 'Login')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('content')
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+    <h1>Login</h1>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Login</div>
-            </div>
+    {{-- <form>
+        {!! csrf_field() !!}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
-    </body>
-</html>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+
+        <button type="submit" class="btn btn-success">Login</button>
+        
+    </form> --}}
+
+    <form method="POST" action="/auth/login">
+        {!! csrf_field() !!}
+
+        <div>
+            Email
+            <input type="email" name="email" value="{{ old('email') }}">
+        </div>
+
+        <div>
+            Password
+            <input type="password" name="password" id="password">
+        </div>
+
+        <div>
+            <input type="checkbox" name="remember"> Remember Me
+        </div>
+
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+       
+@stop
