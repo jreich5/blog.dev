@@ -12,39 +12,48 @@
 */
 
 Route::get('/', function () {
-    return redirect('posts.home');
+    return redirect('/posts');
 });
 
-// Route::get('/home', function () {
-//     return view('posts.home');
+// Route::get('/login', function () {
+//     return view('auth.login');
 // });
-
-Route::get('/home', 'PageController@getHomePage');
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
 Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/post/{postNumber}', function ($postNumber) {
-    $data = ['postNumber' => $postNumber];
-    return view('post.view-post', $data);
-});
+Route::resource('users', 'UsersController');
+Route::resource('posts', 'PostsController');
 
-Route::get('/user-profile/{userNumber}', function ($userNumber) {
-    $data = ['userNumber' => $userNumber];
-    return view('users.user-profile', $data);
-});
+// USER AUTHENTICATION
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::get('/user-posts/{userNumber}', function ($userNumber) {
-    $data = ['userNumber' => $userNumber];
-    return view('users.user-posts', $data);
-});
+// USER REGISTRATION
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('/create-post', function () {
-    return view('posts.create-post');
-});
+// Route::get('/user-profile/{userNumber}', function ($userNumber) {
+//     $data = ['userNumber' => $userNumber];
+//     return view('users.user-profile', $data);
+// });
+
+// Route::get('/create-post', function () {
+//     return view('posts.create-post');
+// });
+
+// Route::get('/', 'PostsController@index');
+
+// Route::get('/post/{postNumber}', function ($postNumber) {
+//     $data = ['postNumber' => $postNumber];
+//     return view('posts.view-post', $data);
+// });
+
+// Route::get('/user-posts/{userNumber}', function ($userNumber) {
+//     $data = ['userNumber' => $userNumber];
+//     return view('users.user-posts', $data);
+// });
+
 
