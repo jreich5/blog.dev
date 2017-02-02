@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -15,8 +16,8 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        return view('posts.home');
     }
 
     /**
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create-post');
     }
 
     /**
@@ -37,9 +38,26 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $rules = [
+            'title' => 'required|max:100',
+            'content'   => 'required'
+        ];
 
+        $this->validate($request, $rules);
+
+        
+
+
+        $post = new Post;
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+
+        $post->save();
+
+        return redirect()->route('posts.show', $post->id);
+
+    }
     /**
      * Display the specified resource.
      *
@@ -48,7 +66,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('posts.view-post');
     }
 
     /**
